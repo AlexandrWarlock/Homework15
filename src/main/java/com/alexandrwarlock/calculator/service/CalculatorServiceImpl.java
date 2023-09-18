@@ -1,5 +1,6 @@
 package com.alexandrwarlock.calculator.service;
 
+import com.alexandrwarlock.calculator.exception.DivideException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,24 +10,25 @@ public class CalculatorServiceImpl implements CalculatorService {
         return "Добро пожаловать в калькулятор";
     }
     @Override
-    public String plus(int num1, int num2) {
-        int result = num1 + num2;
-        return num1 + " + " + num2 + " = " + result;
+    public long plus(int num1, int num2) {
+        return (long) num1 + num2;
     }
     @Override
-    public String minus(int num1, int num2) {
-        int result = num1 - num2;
-        return num1 + " - " + num2 + " = " + result;
+    public long minus(int num1, int num2) {
+
+        return (long) num1 - num2;
     }
     @Override
-    public String divide(int num1, int num2) {
-        double result = (double) num1 / num2;
-        return num1 + " / " + num2 + " = " + result;
+    public double  divide(int num1, int num2) {
+        if (num2 == 0) {
+            throw new DivideException("Деление на 0 недоступно");
+        }
+        return (double) num1 / num2;
     }
 
     @Override
-    public String multiply(int num1, int num2) {
-        int result = num1 * num2;
-        return num1 + " * " + num2 + " = " + result;
+    public long multiply(int num1, int num2) {
+
+        return (long) num1 * num2;
     }
 }
